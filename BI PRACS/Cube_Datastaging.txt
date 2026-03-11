@@ -1,0 +1,97 @@
+
+=====================================================Part 1: The Theory ============================================================
+
+Data Staging Area: Think of this as the "pre-processing kitchen." It's an intermediate zone where raw data is cleaned and transformed before being served to the main Data Warehouse.
+
+OLAP Models (The Big Three):
+
+ROLAP (Relational): Data stays in standard SQL tables. Pros: Handles massive data. Cons: Slower queries. (Analogy: Querying a giant library catalog).
+
+MOLAP (Multidimensional): Data is stored in pre-calculated cubes. Pros: Super fast. Cons: Uses more storage, limited by cube size. (Analogy: Flipping through a pre-organized index).
+
+HOLAP (Hybrid): Combines the detailed tables of ROLAP with the fast aggregated cubes of MOLAP. Best of both worlds, but complex to maintain.
+
+
+===============================================================Part 2: The Procedure =========================================================
+ 
+-- Phase A: Creating the Data Warehouse
+Open SQL Server Management Studio (SSMS) 2008 and connect to the Database Engine.  -> Open a New Query editor.  -> Paste and run (F5) the provided SQL scripts step-by-step.
+
+This creates and populates the Sales_DW database on your server.
+
+
+--Phase B: Developing the OLAP Cube (The 10 Steps)
+==Step 1: Start BIDS Environment
+
+Go to Start Menu -> Microsoft SQL Server 2008 R2 -> SQL Server Business Intelligence Development Studio.
+
+
+==Step 2: Start Analysis Services Project
+
+Click File -> New -> Project -> Business Intelligence Projects -> Analysis Services Project.
+
+Name it SalesDataAnalysis and click OK.
+
+
+==Step 3: Creating New Data Source
+
+In Solution Explorer, right-click Data Source -> New Data Source -> Next -> New.
+
+Enter your SQL Server Name, select Authentication, enter Credentials, and select the Sales_DW database.
+
+Test the connection, click OK, select Inherit, name it, and click Finish.
+
+
+==Step 4: Creating New Data Source View (DSV)
+
+Right-click Data Source View -> New Data Source View -> Next.
+
+Select your Sales_DW relational data source.
+
+Move your Fact Table (FactProductSales) to the right pane.
+
+Click Add Related Tables to automatically bring in all associated dimensions (like Time, Product, etc.). Name it SalesDW DSV and finish.
+
+
+==Step 5: Creating the New Cube
+
+Right-click Cube -> New Cube -> Use existing Tables.
+
+Select your Fact Table (FactProductSales) from the Measure Group Tables.
+
+Choose the Measures you want, select all associated Dimensions, name the cube SalesAnalyticalCube, and finish.
+
+
+==Step 6: Dimension Modification
+
+Double-click Dim Product. -> Drag and drop Product Name from the Data Source View table into the Attribute Pane on the left.
+
+
+==Step 7: Creating Attribute Hierarchy In Date Dimension
+
+Double-click Dim Date. -> Drag fields from the table to the Attributes pane, then drag them into the Hierarchy window in this exact sequence: Year -> Quarter Name -> Month Name -> Week of the Month -> Full Date UK.
+
+
+==Step 8: Deploy the Cube
+
+Right-click your Project Name (SalesDataAnalysis) -> Properties.
+
+Under Configuration Properties -> Deployment, set your SQL Server Instance Name (e.g., mubin-pc\fairy). Set mode to Deploy All and processing to Do Not Process. Click OK.
+
+Right-click the Project Name again -> Deploy. Wait for the "Deployment Completed" message.
+
+
+==Step 9: Process the Cube
+
+Right-click the Project Name -> Process.
+
+Click the Run button. Once it says "Process Succeeded", close both processing windows.
+
+
+==Step 10: Browse the Cube for Analysis
+
+Right-click your Cube (SalesDataAnalysisCube) -> Browse.
+
+The Final Task: 1. Drag Product Name into the Column field.
+2. Drag Full Date UK into the Row field.
+3. Drag the FactProductSalesCount measure into the Detail (center) area.

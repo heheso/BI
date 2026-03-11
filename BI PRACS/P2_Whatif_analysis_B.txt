@@ -1,0 +1,141 @@
+B) Problem :
+1. A firm makes two types of furniture’s, chairs and tables. Profits are ₹ 20 per chair and ₹ 30 per table. Both products are processed on three machines M1, M2 and
+M3. The time required for each product in hours and total time available in hours per week on each machine are as follows:
+
+Machine Chair Table Available Time
+
+M1 	3 	3 	36
+M2 	5 	2 	50
+M3 	2 	6 	60
+
+
+==The "Input" Area (Decision Variables)
+
+This is the part Solver will control. Write the labels in column A and the values in column B.
+
+* **Cell A1:** `Units to Produce`
+* **Cell A2:** `Chairs` | **Cell B2:** `0` (This is the variable cell for chairs)
+* **Cell A3:** `Tables` | **Cell B3:** `0` (This is the variable cell for tables)
+
+
+### The "Profit" Area (The Objective)
+
+This is your "Target" that you want to maximize.
+
+* **Cell A5:** `Profit Per Chair` | **Cell B5:** `20`
+* **Cell A6:** `Profit Per Table` | **Cell B6:** `30`
+* **Cell A7:** **`TOTAL PROFIT`** | **Cell B7:** `=(B2*B5)+(B3*B6)` (**Crucial: Write this formula here**)
+
+
+### The "Constraints" Area (Machine Limits)
+
+This is where you tell Excel how much time you are actually using versus how much you have.
+
+| Cell (A) | Label (A) | Cell (B) | Formula for **Used Time** | Cell (D) | **Available Time** (Limits) |
+| --- 	   | --- 	| --- 	  | --- 		      | --- 	 | --- |
+| **A9**   | Machine M1 | **B9**  | `=(B2*3)+(B3*3)` 	      | **D9** 	 | `36` |
+| **A10**  | Machine M2 | **B10** | `=(B2*5)+(B3*2)` 	      | **D10**  | `50` |
+| **A11**  | Machine M3 | **B11** | `=(B2*2)+(B3*6)` 	      | **D11**  | `60` |
+
+
+
+Data -> Solver
+
+IF SOLVER IS NOW ON THE TAB:
+Open Excel Options
+1. Click on the **File** tab at the very top left of your Excel window.
+2. Look at the bottom of the green left-hand menu and click **Options**. (If you don't see it, click *More...* first).
+1. A new window will pop up. Click on **Add-ins** in the left-side list.
+2. At the bottom of that window, ensure the "Manage" dropdown says **Excel Add-ins**.
+3. Click the **Go...** button next to it.
+1. A small box will appear. Check the box next to **Solver Add-in**. 2.  Click **OK**.
+5.Now, look at the far right of your **Data** tab (right next to where it says "Outline" in your screenshot). A new section called **Analyze** will appear with the **Solver** button inside it.
+
+
+Click on Solver
+1. **Set Objective:** Click on **$B$7** (Your Total Profit formula)
+2. **By Changing Variable Cells:** Highlight **$B$2:$B$3** (The empty cells for Chairs and Tables)
+3. **Subject to the Constraints:** Click **Add** and enter these three:
+* `$B$9 <= $D$9`
+* `$B$10 <= $D$10`
+* `$B$11 <= $D$11`
+
+
+4. **Solving Method:** Choose **Simplex LP**.
+5. Click **Solve**.
+
+
+===================================================================================================================================================================================
+===================================================================================================================================================================================
+
+2. Let be a company has three factories at F1, F2 and F3 . These factries supply warehouses at W1, W2 and W3. But weekly each factory capacities are 200 units, 160units and 90 units respectively. Whereas weekly warehouses requirements are 180units, 120units and 150units respectively. It is given in tabular form unit shipping costs are.
+
+Shipping Cost Per
+Unit
+
+Warehouse
+
+Factory W1 W2 W3
+F1 	16 20 12
+F2 	14 08 18
+F3 	26 24 16
+
+Find the optimum distribution for this company to optimize shipping costs.
+
+
+### 1. The Cost Matrix (Your Reference Data)
+
+Enter the unit shipping costs provided in your manual.
+
+|        | W1 	      | W2 	   |	 W3 	|
+| ---    | --- 	      | ---        | ---        |
+| **F1** | **B2**: 16 | **C2**: 20 | **D2**: 12 |
+| **F2** | **B3**: 14 | **C3**: 08 | **D3**: 18 |
+| **F3** | **B4**: 26 | **C4**: 24 | **D4**: 16 |
+
+
+### 2. The Distribution Matrix (The decision variables)
+
+* **Cells B10 to D12**: Fill these 9 cells with `0`. 
+Cells F10, F11, F12: Type 200, 160, and 90.
+Cells B14, C14, D14: Type 180, 120, and 150.
+
+
+### 3. Formulas for Constraints and Objective
+
+You need to calculate the "Actual" totals so Solver can compare them against the "Limits".
+
+**Factory Supply (Row Totals):**
+
+* **Cell E10**: `=SUM(B10:D10)` (Actual supply from F1)
+* **Cell E11**: `=SUM(B11:D11)` (Actual supply from F2)
+* **Cell E12**: `=SUM(B12:D12)` (Actual supply from F3)
+
+
+**Warehouse Demand (Column Totals):**
+
+ **Cell B13**: `=SUM(B10:B12)` (Actual units received by W1)
+ **Cell C13**: `=SUM(C10:C12)` (Actual units received by W2)
+ **Cell D13**: `=SUM(D10:D12)` (Actual units received by W3)
+
+
+**The Objective (Target Cell):**
+
+* **Cell B15**: `=SUMPRODUCT(B2:D4, B10:D12)`
+
+
+### 4. Setting up the Solver Parameters
+
+Open **Data > Solver** and enter these details:
+
+1. **Set Objective**: `$B$15`
+2. **To**: `Min` (We want the lowest cost!)
+3. **By Changing Variable Cells**: `$B$10:$D$12` (The 9 cells in your distribution grid)
+4. **Subject to the Constraints**:
+* `$E$10:$E$12 <= $F$10:$F$12 (Supply limits)
+* `$B$13:$D$13 >= $B$14:$D$14 (Demand requirements)
+
+
+5. **Solving Method**: `Simplex LP`
+6. Click **Solve**.
+

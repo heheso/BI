@@ -1,0 +1,65 @@
+# [1] Importing the Dataset
+# Note: Only run install.packages() once on your lab computer!
+# install.packages("dplyr") 
+library(dplyr)
+
+# Look at the first few rows of the data
+head(mtcars)
+
+# [2] Splitting the Dataset
+# install.packages("caTools") 
+library(caTools)
+
+# Split data into 80% for training and 20% for testing
+split <- sample.split(mtcars, SplitRatio = 0.8)
+train_reg <- subset(mtcars, split == "TRUE")
+test_reg <- subset(mtcars, split == "FALSE")
+
+# [3] Building the model
+# Train the model using features in the dataset
+logistic_model <- glm(vs ~ wt + disp, data = train_reg, family = "binomial")
+
+# View the model and its summary statistics
+logistic_model
+summary(logistic_model)
+
+# [4] Predicting on Unseen Data
+# We use the test_reg dataset we created in Step 2.
+# type = "response" tells R to output probabilities (between 0 and 1).
+predict_reg <- predict(logistic_model, test_reg, type = "response")
+
+# View the raw probabilities 
+print(predict_reg)
+
+# Convert probabilities into binary classes (0 or 1)
+# If the probability is greater than 50% (0.5), classify as 1. Otherwise, 0.
+predicted_classes <- ifelse(predict_reg > 0.5, 1, 0)
+
+# Compare our predictions against the actual data
+print(predicted_classes)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Linear Regression predicts a continuous number (like predicting someone weighs exactly 72.5 kg).
+
+Logistic Regression is a supervised learning algorithm used for binary classification (like a "Yes/No" or "Success/Failure" scenario). It predicts the probability that an item belongs to a certain class.
+
+The Formula (vs ~ wt + disp)
+Just like lm() used y ~ x, we are telling R what we want to predict.
+vs is the Target Variable (Binary: Is the engine V-shaped (0) or straight (1)?).
+wt (Weight) and disp (Displacement) are the Predictor features we think influence the engine type.
+
+3. The Algorithm (glm and family = "binomial")
+In R, glm() stands for Generalized Linear Model. Because glm can do many different types of math, you must include family = "binomial"

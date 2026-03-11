@@ -1,0 +1,143 @@
+A) Problem :
+1. Create a worksheet for a loan amount of 3,00,000, Rate of interest 6% and period is 30years. Find the loan amount that produces a monthly payment of $1500 using Goal Seek Tool.
+2. Create a worksheet for Key Assumptions and Target variables as follows:
+
+
+===============================================================Problem 1: Loan Calculation using Goal Seek============================================================
+The Objective: You want to buy a house, but you only have a budget of $1500 per month for the mortgage. Goal Seek will calculate backward to tell you the maximum loan amount you can afford.
+
+==Step 1: Set up the Worksheet
+Open a blank Excel sheet and enter this exact data:
+
+A1: Loan Amount | B1: 300000
+
+A2: Rate of Interest | B2: 6%
+
+A3: Period (Years) | B3: 30
+
+A4: Monthly Payment | B4: (We need a formula here)
+
+
+==Step 2: Enter the PMT Formula
+
+In cell B4, enter the following formula:  =PMT(B2/12, B3*12, -B1)
+
+We divide the interest rate by 12 (B2/12) because you pay monthly, not yearly.
+We multiply the years by 12 (B3*12) to get the total number of months (360).
+We put a minus sign in front of the loan amount (-B1) so our final payment shows up as a positive number instead of a negative debt. Your initial result will show $1,798.65.
+
+==Step 3: Use Goal Seek
+Now, let's force that payment down to $1500.
+
+Go to the Data tab on the ribbon.
+
+Click What-If Analysis > Goal Seek...
+
+Fill in the dialog box:
+
+Set cell: B4 (Your formula cell).
+
+To value: 1500 (Your target budget).
+
+By changing cell: B1 (The loan amount you are allowed to change).
+
+Click OK. Excel will calculate backward and change your Loan Amount in B1 to $250,187.42.
+
+
+====================================================Problem 2: Financial Modeling using Scenario Manager=========================================================
+The Objective: Goal Seek only lets you change one variable. The Scenario Manager allows you to change multiple variables at once (like increasing Revenue while decreasing Marketing) to see how it impacts your final Net Profit.
+
+==Step 1: Set up the Input Variables
+Enter these labels in Column A and values in Column B:
+
+A1: Revenue | B1: 500000
+
+A2: COGS | B2: 300000
+
+A3: Operating Expenses | B3: 100000
+
+A4: Marketing Expenses | B4: 50000
+
+A5: R&D Expenses | B5: 20000
+
+A6: Interest Expenses | B6: 10000
+
+A7: Tax Rate | B7: 25% (or 0.25)
+
+
+==Step 2: Set up the Output (Target) Variables with Formulas
+We must use formulas for the outputs so they update when the scenarios change! Enter these in Column D (Labels) and Column E (Formulas):
+
+D1: Gross Profit | E1: =B1-B2 (Revenue - COGS)
+
+D2: Operating Profit | E2: =E1-B3-B4-B5 (Gross Profit - Opex - Marketing - R&D)
+
+D3: Pre-Tax Profit | E3: =E2-B6 (Operating Profit - Interest)
+
+D4: Net Profit | E4: =E3-(E3*B7) (Pre-Tax Profit minus Taxes)
+
+(If you typed the formulas correctly, your Net Profit in E4 will perfectly match the 15000 from your question prompt!)
+
+
+==Step 3: Create the Scenarios
+----Phase 1: Input the Scenarios in Scenario Manager
+
+Go to the Data tab -> What-If Analysis -> Scenario Manager... -> Click Add to create the Best Case Scenario:
+
+--Scenario Name: Best Case
+
+Changing Cells: Highlight cells B1:B7 (your input variables).
+
+Click OK. Enter these values in the boxes:
+
+Revenue: 600000
+
+COGS: 280000
+
+Operating Expenses: 90000
+
+Marketing Expenses: 40000
+
+R&D Expenses: 15000
+
+Interest Expenses: 8000
+
+Tax Rate: 0.25
+
+Click Add (don't click OK yet, so you can add the second one).
+
+
+--Create the Worst Case Scenario:
+
+Scenario Name: Worst Case
+
+Changing Cells: Ensure it still says B1:B7.
+
+Click OK. Enter these values:
+
+Revenue: 400000
+
+COGS: 320000
+
+Operating Expenses: 110000
+
+Marketing Expenses: 60000
+
+R&D Expenses: 25000
+
+Interest Expenses: 12000
+
+Tax Rate: 0.25
+
+Click OK.
+
+
+==Phase 2: Generate the Final Report
+
+In the Scenario Manager window, click the Summary... button. -> Ensure Scenario Summary is selected.
+
+Result Cells: Highlight your output formula cells (e.g., E1:E4, where Gross Profit to Net Profit are calculated).  -> Click OK.
+
+The Result: Excel will create a new sheet. You will see your Current Values, Best Case, and Worst Case side-by-side.
+
+

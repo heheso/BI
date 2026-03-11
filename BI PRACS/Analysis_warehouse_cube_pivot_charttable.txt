@@ -1,0 +1,89 @@
+1. Perform the analysis for the following:
+a. Import the data warehouse data in Microsoft Excel and create the Pivot table and Pivot
+Chart.
+b. Import the cube in Microsoft Excel and create the Pivot table and Pivot Chart to perform data analysis.
+
+
+
+=====================Part 1 — Create the Sales Data Warehouse (SQL Server)
+
+Step 1: Download SQL Script from:
+EITHER THE DATABASE SCRIPT WILL BE ALREADY AVAILBALE IN PRAC1 FOLDER 
+
+Or download it from here:
+👉 [https://www.codeproject.com/Articles/652108/Create-First-Data-WareHouse](https://www.codeproject.com/Articles/652108/Create-First-Data-WareHouse)
+
+----Extract Data_WareHouse_SQLScript.zip -> open in notepad and copy the everything
+
+====Step 2: Open SQL Server Management Studio (SSMS)
+
+1. Open **SQL Server Management Studio (SSMS)**
+2. Click **Connect → Database Engine**
+3. Connect using:
+   * Server name: *(your SQL Server name)*
+   * Authentication: Windows Authentication (usually)
+4. The Database engine should appear in Object Explorer on left along with dbs.
+
+
+====Step 3: Run the SQL Script
+
+1. Click **New Query** -> paste the content we copied ->  Press **F5** / Execute
+
+✅ This will automatically:
+
+* Create database **Sales_DW**
+* Create tables (Fact + Dimension tables)
+
+
+====Step 4: Verify Database
+
+1. In Object Explorer → Databases -> Refresh -> You should see:  Sales_DW
+
+Close and reopen SSMS if it doesn’t appear immediately.
+
+
+============================Part 2 — Import Data Warehouse into Excel=======================
+
+===============Step 1: Open Excel
+
+1. Open **Microsoft Excel**
+2. Go to: Data tab → Get Data → From Database -> From SQL server database -> It will ask for Server -> GO to MicrosoftSQL and copy the server name -> paste it on excel -> OK
+3. Databases will appear in excel select Sales_DW -> Load 
+
+
+===========================**PivotChart and PivotTable Report**==========================
+
+1. In Excel ribbon go to Insert -> PivotChart -> Pivot Chart & Pivot Table
+
+Example Setup
+
+Drag fields like:
+
+| Area    | Example Field |
+| ------- | ------------- |
+| Rows    | ProductName   |
+| Columns | CustomerName  |
+| Values  | ProductSalesCost|
+| Filters |SalesDateKey   |
+
+Excel automatically builds Pivot Table amd Pivot Chart.
+
+
+# ✅ Part 4 — Create Pivot Chart
+
+Since you selected PivotChart earlier:
+
+1. Chart appears automatically.
+2. If not:
+
+```
+PivotTable Analyze → PivotChart
+
+Choose chart type:
+
+* Column Chart (best for sales)
+* Line Chart
+* Pie Chart
+
+Click **OK**
+
