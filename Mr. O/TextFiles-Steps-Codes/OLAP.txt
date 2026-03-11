@@ -1,0 +1,145 @@
+Create the cube with suitable dimension and fact tables based on ROLAP, MOLAP andHOLAP model.
+
+Solution
+
+========================================
+PROCEDURE
+========================================
+
+[1] Creating Data Warehouse
+
+1. Open SQL Server Management Studio 2008.
+2. Connect to Database Engine.
+3. Click on New Query.
+4. Copy and paste the SQL scripts provided by the teacher step by step in the query editor.
+5. Press F5 to execute the SQL script.
+6. After execution, the database "Sales_DW" will be created and populated in SQL Server.
+
+[2] Developing an OLAP Cube
+
+Step 1: Start BIDS Environment
+1. Click Start Menu.
+2. Go to Microsoft SQL Server 2008 R2.
+3. Click SQL Server Business Intelligence Development Studio (BIDS).
+
+----------------------------------------
+Step 2: Start Analysis Services Project
+----------------------------------------
+1. Click File → New → Project.
+2. Select Business Intelligence Projects.
+3. Choose Analysis Services Project.
+4. Enter Project Name: SalesDataAnalysis.
+5. Click OK.
+
+----------------------------------------
+Step 3: Creating New Data Source
+----------------------------------------
+1. In Solution Explorer, right click on Data Sources.
+2. Click New Data Source.
+3. Click Next.
+4. Click New to create a connection.
+Create Connection:
+    a) Enter SQL Server Name where Sales_DW database exists.
+    b) Select Authentication Mode (Windows or SQL Server).
+    c) Enter login credentials.
+    d) Select database: Sales_DW.
+    e) Click Test Connection to verify.
+    f) Click OK.
+5. Select the created connection.
+6. Click Next.
+7. Select option Inherit.
+8. Assign Data Source Name.
+9. Click Finish.
+
+----------------------------------------
+Step 4: Creating Data Source View
+----------------------------------------
+1. In Solution Explorer, right click Data Source Views.
+2. Click New Data Source View.
+3. Click Next.
+4. Select relational data source Sales_DW.
+5. Click Next.
+Add Fact Table:
+6. Select FactProductSales table.
+7. Click Arrow button to move it to the right pane.
+Add Related Dimension Tables:
+8. Select FactProductSales table.
+9. Click Add Related Tables.
+10. All related dimension tables will be added automatically.
+11. Click Next.
+12. Assign Name: SalesDW_DSV.
+13. Click Finish.
+
+----------------------------------------
+Step 5: Creating New Cube
+----------------------------------------
+1. In Solution Explorer, right click Cube.
+2. Click New Cube.
+3. Click Next.
+4. Select Use Existing Tables.
+5. Click Next.
+6. Select Fact Table:
+   FactProductSales.
+7. Select Measures from the list.
+8. Click Next.
+9. Select all associated Dimensions.
+10. Click Next.
+11. Assign Cube Name:
+    SalesAnalyticalCube.
+12. Click Finish.
+----------------------------------------
+Step 6: Dimension Modification
+----------------------------------------
+1. In Solution Explorer, double click DimProduct.
+2. Drag and drop Product Name from table in Data Source View.
+3. Add it to Attribute Pane.
+----------------------------------------
+Step 7: Create Attribute Hierarchy in Date Dimension
+----------------------------------------
+1. Double click DimDate dimension.
+2. Drag the following attributes from table to Attributes pane:
+   Year
+   Quarter Name
+   Month Name
+   Week of Month
+   Full Date UK
+3. Create hierarchy by dragging attributes in this order:
+   Year → Quarter → Month → Week → Full Date
+
+----------------------------------------
+Step 8: Deploy the Cube
+----------------------------------------
+1. In Solution Explorer, right click Project Name.
+2. Click Properties.
+3. Under Configuration Properties → Deployment:
+   - Enter SQL Server Analysis Services instance name.
+   - Example: mubin-pc\fairy
+   - Set Deployment Mode = Deploy All
+   - Processing Option = Do Not Process.
+4. Click OK.
+5. Right click Project Name (SalesDataAnalysis).
+6. Click Deploy.
+7. Wait until message appears:
+   Deployment Completed.
+
+----------------------------------------
+Step 9: Process the Cube
+----------------------------------------
+1. Right click Project Name (SalesDataAnalysis).
+2. Click Process.
+3. Click Run.
+4. After processing, message appears:
+   Process Succeeded.
+5. Click Close.
+
+----------------------------------------
+Step 10: Browse the Cube
+----------------------------------------
+1. In Solution Explorer, right click Cube (SalesAnalyticalCube).
+2. Click Browse.
+To Analyze Data:
+1. Drag Product Name into Column Field.
+2. Drag Full Date UK into Row Field.
+3. Drag FactProductSalesCount measure into Detail area.
+
+Now the OLAP Cube will display analytical results.

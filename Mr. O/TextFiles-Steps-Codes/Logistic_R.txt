@@ -1,0 +1,78 @@
+Perform the logistic regression on the given data warehouse data using R.
+
+Solution
+
+#if only library not getting downloaded
+options(repos = c(CRAN = "https://cloud.r-project.org"))
+
+################################################
+# Logistic Regression Implementation in R
+################################################
+
+#----------------------------------------
+# [1] Importing Required Packages
+#----------------------------------------
+
+install.packages("dplyr")
+library(dplyr)
+
+# View first rows of dataset
+head(mtcars)
+
+
+#----------------------------------------
+# [2] Splitting the Dataset
+#----------------------------------------
+
+install.packages("caTools")
+library(caTools)
+
+# Split dataset (80% training, 20% testing)
+split <- sample.split(mtcars$vs, SplitRatio = 0.8)
+
+train_reg <- subset(mtcars, split == TRUE)
+test_reg  <- subset(mtcars, split == FALSE)
+
+
+#----------------------------------------
+# [3] Building Logistic Regression Model
+#----------------------------------------
+
+logistic_model <- glm(vs ~ wt + disp,
+                      data = train_reg,
+                      family = "binomial")
+
+# Print model
+logistic_model
+
+
+#----------------------------------------
+# [4] Model Summary
+#----------------------------------------
+
+summary(logistic_model)
+
+
+#----------------------------------------
+# [5] Predicting Test Data
+#----------------------------------------
+
+probabilities <- predict(logistic_model, test_reg, type = "response")
+
+print(probabilities)
+
+
+#----------------------------------------
+# [6] Convert Probabilities to Classes
+#----------------------------------------
+
+predicted_classes <- ifelse(probabilities > 0.5, 1, 0)
+
+print(predicted_classes)
+
+
+#----------------------------------------
+# [7] Compare with Actual Values
+#----------------------------------------
+
+table(Predicted = predicted_classes, Actual = test_reg$vs)

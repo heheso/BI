@@ -1,0 +1,104 @@
+Apply the what - if Analysis for data visualization. Design and generate necessary reports based on the data warehouse data.
+
+Solution
+
+**Practical NO. 2**
+open excel 
+1a)
+1. create this table 
+-----------------
+Annual Rate			6%
+Years				30
+Loan Amount			300000
+	
+Monthly Installment(EMI)	=PMT(B1/12,B2*12,B3) ... by typing this formula, ₹ -1,798.65 will appear
+-----------------
+2. data tab --> what if analysis --> Goal seek
+for set cell: B5, for to value: -1500, by changing cell: B3
+ok
+
+this will be result
+-----------------
+Annual Rate			6%
+Years				30
+Loan Amount			250187.4216
+	
+Monthly Installment(EMI)	₹ -1,500.00
+
+-----------------
+2a)
+1. create this table
+-----------------
+Input Variables (key Assumptions)	
+Revenue 		500000
+COGS 			300000
+Operating Expenses 	100000
+Marketing Expenses 	50000
+R&D Expenses 		20000
+Interest Expenses 	10000
+Tax Rate 		0.25
+	
+Output (Target) Variables	
+Gross Profit 		=B2-B3 ....200000
+Operating Profit 	=B11-SUM(B4:B6) ....30000
+Pre-Tax Profit 		=B12-B7 ....20000
+Net-Profit 		=B13-(B13*B8) ....15000
+
+-----------------
+2. data tab --> what if analysis --> Scenario Manager
+3. In Scenario Manager 
+add --> scenario name: BEST_CASE, changing cell: B2:B8,  ok --> B2:600000, B3:280000, B4:90000, B5:40000, B6:15000, B7:8000, B8:0.25,  ok
+add --> scenario name: WORST_CASE, changing cell: B2:B8,  ok --> B2:400000, B3:320000, B4:110000, B5:60000, B6:25000, B7:12000, B8:0.25,  ok
+summary --> Result cells: B11:B14, ok
+
+this will be result
+-------------------
+Scenario Summary					
+		Current Values:	BEST_CASE	WORST_CASE	
+Changing Cells:					
+	$B$2	500000		600000		400000	
+	$B$3	300000		280000		320000	
+	$B$4	100000		90000		110000	
+	$B$5	50000		40000		60000	
+	$B$6	20000		15000		25000	
+	$B$7	10000		8000		12000	
+	$B$8	0.25		0.25		0.25	
+Result Cells:					
+	$B$11	200000		320000		80000	
+	$B$12	30000		175000		-115000	
+	$B$13	20000		167000		-127000	
+	$B$14	15000		125250		-95250	
+Notes:  Current Values column represents values of changing cells at					
+time Scenario Summary Report was created.  Changing cells for each					
+scenario are highlighted in gray.					
+
+-------------------
+
+2b1)
+1. create this table
+-----------------
+				  Chair		Table			Pofit		
+Decision Variable			 0		 0			
+Contribution				20		30		=SUMPRODUCT($B$2:$C$2,B3:C3) ....0		
+					
+Constraints														Maximum Capacity	
+Machine 				1		3		=SUMPRODUCT($B$2:$C$2,B6:C6) ....0		36	
+Machine 				2		5		=SUMPRODUCT($B$2:$C$2,B7:C7) ....0		50	
+Machine 				3		2		=SUMPRODUCT($B$2:$C$2,B8:C8) ....0		60	
+
+-----------------
+2. copy formula of D3(=SUMPRODUCT($B$2:$C$2,B3:C3))
+	and paste it in D6,D7,D8
+3. Select D3,
+	data -> Solver (If Solver not present, file -> Options -> Add-ins -> Select Solver add in -> Go)
+		Set Objective: $D$3
+		To: Max
+		By changing cells: $B$2:$C$2
+		Add
+			$D$6 <= $E$6
+			$D$7 <= $E$7
+			$D$8 <= $E$8
+		Select Solving Method: Simplex LP
+		Solve
+		Ok
+		

@@ -1,0 +1,58 @@
+Create the ETL map for the above and setup the schedule for execution
+
+========================
+ETL Process using Excel
+========================
+ETL = Extract → Transform → Load
+
+--------------------------------
+Step 1: Extract (Import Data)
+--------------------------------
+1. Open Excel
+2. Go to Data tab
+3. Click Get Data → From File → From Workbook / From Text/CSV
+4. Select your dataset file
+5. Click Transform Data
+Power Query Editor will open.
+
+--------------------------------
+Step 2: Transform (Clean Data)
+--------------------------------
+Inside Power Query Editor perform transformations:
+• Remove blank rows
+Home → Remove Rows → Remove Blank Rows
+• Rename columns if needed
+Double-click column header
+• Change data types
+Transform → Data Type → Detect types
+• Remove duplicates
+Home → Remove Rows → Remove Duplicates
+• Create calculated column if required
+Add Column → Custom Column
+Example:
+Profit = Sales * 0.20
+
+--------------------------------
+Step 3: Load Data
+--------------------------------
+1. Click Close & Load
+2. Data will be loaded into Excel sheet or Data Model
+
+--------------------------------
+Step 4: Refresh Data
+--------------------------------
+Data → Refresh All
+
+--------------------------------
+Step 5: Scheduling in Excel
+--------------------------------
+Excel does not support full automation like Power BI,
+but you can schedule refresh:
+
+1. Data → Queries & Connections
+2. Right Click Query → Properties
+3. Enable:
+   ✔ Refresh data when opening file
+   ✔ Refresh every X minutes
+
+This acts as a basic schedule.

@@ -1,0 +1,123 @@
+Perform data visualization using PowerBI on any sales data.
+
+Solution
+
+1. Open Power BI Desktop.
+2. Click on 'Get Data' → Select 'CSV' or your sales data source → Load your dataset.
+3. Once data is loaded, go to the 'Report' view.
+4. Use the 'Fields' pane to drag and drop the following:
+   - Axis: Date or Month
+   - Values: TotalPrice, Quantity, or Profit
+   - Legend: Product or Region (for comparison)
+5. Choose visualizations from the 'Visualizations' pane:
+   - Column Chart: Compare sales across regions or products.
+   - Line Chart: Trend of Total Sales over time.
+   - Pie Chart: Sales distribution by Product or Customer Type.
+   - Table or Matrix: Detailed view of sales data.
+6. Apply Filters/Slicers for interactive analysis:
+   - Add slicers for Region, Product, or CustomerType to filter data dynamically.
+7. Customize visual appearance:
+   - Use different colors, labels, and data formatting for clarity.
+
+
+OData
+
+Step 1: Open Power BI Desktop
+1. Start Microsoft Power BI Desktop.
+2. On the Home tab click Get Data.
+
+----------------------------------------------------
+
+Step 2: Import Data from OData Feed
+1. Click Get Data → Select OData Feed.
+2. In the URL box paste the following link:
+http://services.odata.org/V3/Northwind/Northwind.svc/
+3. Click OK.
+4. In the Navigator window select:
+   Orders
+   Products
+5. Click Transform Data.
+
+----------------------------------------------------
+
+Step 3: Data Transformation in Power Query Editor
+A) Remove Unwanted Columns
+1. Select columns:
+   ProductID
+   ProductName
+   QuantityPerUnit
+   UnitsInStock
+2. Right-click any selected column.
+3. Click Remove Other Columns.
+
+B) Change Data Type
+1. Select UnitsInStock column.
+2. Go to Home tab.
+3. Click Data Type.
+4. Select Whole Number.
+
+C) Expand Order Details Table
+1. Scroll to the Order_Details column.
+2. Click the Expand icon (two arrows).
+3. Select the following fields:
+   ProductID
+   UnitPrice
+   Quantity
+4. Click OK.
+
+D) Create Custom Column (Line Total)
+1. Click Add Column tab.
+2. Click Custom Column.
+3. In the formula box type:
+[Order_Details.UnitPrice] * [Order_Details.Quantity]
+4. Name the column:
+LineTotal
+5. Click OK.
+
+E) Rename Columns
+1. Remove "Order_Details." prefix from:
+   ProductID
+   UnitPrice
+   Quantity
+2. Drag LineTotal column after ShipCountry.
+
+----------------------------------------------------
+
+Step 4: Load Data into Power BI
+1. Click Home → Close & Load.
+2. Power BI loads the tables into the data model.
+
+----------------------------------------------------
+
+Step 5: Confirm Relationship Between Tables
+1. Go to Home tab.
+2. Click Manage Relationships.
+3. Click New.
+4. Verify relationship between:
+   Products.ProductID
+   Orders.ProductID
+5. Click OK.
+
+----------------------------------------------------
+
+Step 6: Create Visualization Charts
+A) Units in Stock by Product
+1. Drag UnitsInStock to report canvas.
+2. Select Table visualization.
+3. Drag ProductName to Axis field.
+4. Sort by UnitsInStock.
+
+B) Total Sales by Year
+1. Drag OrderDate to canvas.
+2. Select Line Chart visualization.
+3. Drag LineTotal to Values field.
+
+C) Sales by Country (Map)
+1. Drag ShipCountry to canvas.
+2. Map visualization will appear.
+3. Drag LineTotal to Values field.
+
+Result:
+1. Table showing Units in Stock by Product.
+2. Line chart showing Total Sales by Year.
+3. Map visualization showing Sales by Country.

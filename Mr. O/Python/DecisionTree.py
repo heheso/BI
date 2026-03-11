@@ -1,0 +1,65 @@
+# Import Libraries
+import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier, export_text, plot_tree
+from sklearn.metrics import accuracy_score, confusion_matrix
+import matplotlib.pyplot as plt
+
+# ==========================
+# 1. Create Example Dataset
+# ==========================
+# Sample data: predicting whether a student passes based on marks in 3 subjects
+data = {
+    'Subject1': [78, 60, 90, 55, 82, 70, 85, 40],
+    'Subject2': [82, 65, 95, 50, 80, 68, 88, 45],
+    'Subject3': [74, 58, 92, 48, 76, 64, 90, 42],
+    'Pass': ['Yes', 'No', 'Yes', 'No', 'Yes', 'No', 'Yes', 'No']
+}
+
+df = pd.DataFrame(data)
+
+# ==========================
+# 2. Split Features and Target
+# ==========================
+X = df[['Subject1', 'Subject2', 'Subject3']]
+y = df['Pass']
+
+# ==========================
+# 3. Train/Test Split
+# ==========================
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=42)
+
+# ==========================
+# 4. Train Decision Tree
+# ==========================
+clf = DecisionTreeClassifier(criterion='entropy', max_depth=3, random_state=42)
+clf.fit(X_train, y_train)
+
+# ==========================
+# 5. Make Predictions
+# ==========================
+y_pred = clf.predict(X_test)
+
+# ==========================
+# 6. Evaluate Model
+# ==========================
+accuracy = accuracy_score(y_test, y_pred)
+cm = confusion_matrix(y_test, y_pred)
+
+print("Predictions:", y_pred)
+print("Accuracy:", accuracy)
+print("Confusion Matrix:\n", cm)
+
+# ==========================
+# 7. Visualize Decision Tree
+# ==========================
+plt.figure(figsize=(8,8))
+plot_tree(clf, feature_names=['Subject1','Subject2','Subject3'], 
+          class_names=['No','Yes'], filled=True, rounded=True)
+plt.show()
+
+# ==========================
+# 8. Print Tree Rules
+# ==========================
+tree_rules = export_text(clf, feature_names=['Subject1','Subject2','Subject3'])
+print(tree_rules)

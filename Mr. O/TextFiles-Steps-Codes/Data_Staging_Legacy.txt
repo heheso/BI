@@ -1,0 +1,172 @@
+(A) Create the Data staging area for the selected database using SQL server. 
+(B) Import the legacy data from different sources such as (Excel) and load in the target system(SQL server)
+
+========================================
+(A) Create Data Staging Area using Latest SSMS
+========================================
+A Data Staging Area is a temporary storage location used to store raw data
+from different sources before loading it into the Data Warehouse.
+
+----------------------------------------
+Step 1: Open SQL Server Management Studio
+----------------------------------------
+1. Open Microsoft SQL Server Management Studio.
+2. Connect to Database Engine.
+3. Click New Query.
+
+----------------------------------------
+Step 2: Create Staging Database
+----------------------------------------
+Run the following SQL command:
+CREATE DATABASE Sales_Staging;
+Press F5 or click Execute.
+
+----------------------------------------
+Step 3: Use the Staging Database
+----------------------------------------
+Run:
+USE Sales_Staging;
+
+----------------------------------------
+Step 4: Create Staging Table
+----------------------------------------
+Run the following SQL script:
+CREATE TABLE Stg_Sales
+(
+Sale_ID INT,
+Product_Name VARCHAR(100),
+Customer_Name VARCHAR(100),
+Sale_Date DATE,
+Quantity INT,
+Amount DECIMAL(10,2)
+);
+Press Execute.
+
+Now the staging table is ready to receive imported data.
+
+========================================
+(B) Import Legacy Data from Excel into SQL Server
+========================================
+
+----------------------------------------
+Step 1: Start Import Wizard
+----------------------------------------
+1. In Object Explorer, right click on database Sales_Staging.
+2. Click Tasks.
+3. Select Import Flat File OR Import Data.
+
+----------------------------------------
+Step 2: Select Data Source
+----------------------------------------
+1. Choose Data Source: Microsoft Excel.
+2. Browse and select the Excel file.
+3. Select Excel version.
+4. Enable option:
+   ✔ First row has column names.
+5. Click Next.
+
+----------------------------------------
+Step 3: Select Destination
+----------------------------------------
+1. Destination: SQL Server Native Client / SQL Server.
+2. Server Name: Your server name.
+3. Database: Sales_Staging.
+4. Click Next.
+
+----------------------------------------
+Step 4: Choose Table Mapping
+----------------------------------------
+1. Select Excel sheet (Sheet1$).
+2. Map it to staging table:
+   Stg_Sales.
+3. Click Next.
+
+----------------------------------------
+Step 5: Execute Import
+----------------------------------------
+1. Click Finish.
+2. The wizard will load Excel data into SQL Server staging table.
+
+----------------------------------------
+Step 6: Load Data into Target Data Warehouse Table
+----------------------------------------
+Example SQL:
+INSERT INTO Sales_Fact
+SELECT * FROM Stg_Sales;
+
+
+----------------------------------------
+Data Flow
+----------------------------------------
+Excel File (Legacy Data)
+        ↓
+Staging Table (Stg_Sales)
+        ↓
+Target Table (Sales_Fact)
+        ↓
+Data Warehouse
+
+
+========================================
+(B) Import Legacy Data using Flat File Wizard
+========================================
+Since "Import Data" is not available, use the Flat File Wizard.
+
+----------------------------------------
+Step 1: Convert Excel File to CSV
+----------------------------------------
+1. Open your Excel file.
+2. Click File → Save As.
+3. Select file type:
+   CSV (Comma Delimited) (*.csv)
+4. Save the file.
+
+----------------------------------------
+Step 2: Import CSV File
+----------------------------------------
+1. In Object Explorer, expand Databases.
+2. Right click Sales_Staging database.
+3. Click Tasks → Import Flat File.
+
+----------------------------------------
+Step 3: Select File
+----------------------------------------
+1. Browse the CSV file.
+2. Enter table name:
+   Stg_Sales
+3. Click Next.
+
+----------------------------------------
+Step 4: Preview Data
+----------------------------------------
+1. Verify column names and data types.
+2. Click Next.
+
+----------------------------------------
+Step 5: Modify Columns (if needed)
+----------------------------------------
+Check:
+• Column names
+• Data types (INT, VARCHAR, DATE)
+Click Next.
+
+----------------------------------------
+Step 6: Finish Import
+----------------------------------------
+Click Finish.
+SQL Server will create the table and load the CSV data.
+
+----------------------------------------
+Result
+----------------------------------------
+Data Flow:
+
+Excel File
+      ↓
+CSV File
+      ↓
+Flat File Import Wizard
+      ↓
+Staging Table (Stg_Sales)
+      ↓
+Target Data Warehouse Tables

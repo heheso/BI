@@ -1,0 +1,84 @@
+A student has scored marks in four subjects, and they want to predict their total and average
+marks based on different scoring scenarios for Subject 4.
+Given Data:
+Subject     Marks
+Subject 1   78
+Subject 2   82
+Subject 3   74
+Subject 4   (To be changed in scenarios)
+Tasks: Calculate the total marks and average marks using Excel formulas.
+Use What-If Analysis (Scenarios Manager) to create different scenarios for Subject 4 Marks, such as:
+1. Best Case: 90 marks
+2. Expected Case: 75 marks
+3. Worst Case: 60 marks
+Analyze how the total marks and average marks change based on these different
+scenarios.
+
+Solution 
+
+==========================
+1. Enter the Data in Excel
+==========================
+A              B
+Subject        Marks
+Subject 1      78
+Subject 2      82
+Subject 3      74
+Subject 4      75   <-- initial value (can be any number)
+
+Total
+Average
+
+===============================================
+2. Calculate Total and Average (Excel Formulas)
+===============================================
+Total Marks
+In cell B7 type:
+=SUM(B2:B5)
+Result → 234 + Subject 4 marks   ...309
+
+Average Marks
+In cell B8 type:
+=AVERAGE(B2:B5)
+Result → (234 + Subject 4 marks)/4    ...77.25
+
+========================================
+3. Use What-If Analysis → Scenario Manager
+========================================
+Goal: Analyze how total and average change for different Subject 4 scores.
+
+-- Step 1: Open Scenario Manager
+Data → What-If Analysis → Scenario Manager → Add
+
+-- Step 2: Create Scenarios
+Scenario 1: Best Case
+   Name: Best Case
+   Changing Cell: B5 (Subject 4 marks)
+   Value: 90
+Scenario 2: Expected Case
+   Name: Expected Case
+   Changing Cell: B5
+   Value: 75
+Scenario 3: Worst Case
+   Name: Worst Case
+   Changing Cell: B5
+   Value: 60
+
+-- Step 3: Show Results
+1. Click "Summary…" in Scenario Manager
+2. Select Result Cells: B7 (Total), B8 (Average)
+3. Excel will generate a summary table
+
+Example Result Table:
+
+Scenario        Subject 4   Total Marks   Average Marks
+Best Case       90          324           81
+Expected Case   75          309           77.25
+Worst Case      60          294           73.5
+
+===========================
+4. Interpretation
+===========================
+- The total and average marks increase if Subject 4 marks increase.  
+- In the best case (90), total = 324 and average = 81.  
+- In the worst case (60), total = 294 and average = 73.5.  

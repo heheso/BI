@@ -1,0 +1,118 @@
+(A) Create the Data staging area for the selected database. 
+(B) Perform the Extraction Transformation and Loading (ETL) process to construct the database in the SQL Server.
+
+Solution
+
+========================================
+(A) Creating the Data Staging Area
+========================================
+A Data Staging Area is a temporary storage area used to store
+raw data before loading it into the final database.
+
+----------------------------------------
+Step 1: Open SQL Server Management Studio
+----------------------------------------
+1. Start Microsoft SQL Server Management Studio.
+2. Connect to Database Engine.
+
+----------------------------------------
+Step 2: Create Staging Database
+----------------------------------------
+Open New Query and execute:
+CREATE DATABASE Sales_Staging;
+Press F5 to run the query.
+
+----------------------------------------
+Step 3: Use the Staging Database
+----------------------------------------
+USE Sales_Staging;
+
+----------------------------------------
+Step 4: Create Staging Tables
+----------------------------------------
+Example staging table:
+CREATE TABLE Stg_ProductSales
+(
+Sale_ID INT,
+Product_Name VARCHAR(100),
+Customer_Name VARCHAR(100),
+Sale_Date DATE,
+Quantity INT,
+Sales_Amount DECIMAL(10,2)
+);
+Execute the query.
+Now the Data Staging Area is ready.
+
+========================================
+(B) Perform ETL Process in SQL Server
+========================================
+ETL = Extract → Transform → Load
+
+----------------------------------------
+Step 1: Extraction
+----------------------------------------
+Data is extracted from external sources such as:
+• Excel files
+• CSV files
+• Legacy databases
+Example:
+Excel sales data is saved as CSV file.
+
+----------------------------------------
+Step 2: Load Data into Staging Table
+----------------------------------------
+Using Import Flat File Wizard:
+1. Right click database Sales_Staging.
+2. Select Tasks → Import Flat File.
+3. Select CSV file.
+4. Import data into table Stg_ProductSales.
+
+----------------------------------------
+Step 3: Transformation
+----------------------------------------
+Data cleaning and transformation is performed
+before loading into the final database.
+Examples:
+Remove null values
+
+DELETE FROM Stg_ProductSales
+WHERE Product_Name IS NULL;
+
+Convert formats or calculate fields if required.
+
+----------------------------------------
+Step 4: Loading into Target Database
+----------------------------------------
+Create final table:
+
+CREATE TABLE ProductSales
+(
+Sale_ID INT,
+Product_Name VARCHAR(100),
+Customer_Name VARCHAR(100),
+Sale_Date DATE,
+Quantity INT,
+Sales_Amount DECIMAL(10,2)
+);
+
+Load data from staging table:
+INSERT INTO ProductSales
+SELECT *
+FROM Stg_ProductSales;
+
+----------------------------------------
+Result
+----------------------------------------
+Data Flow of ETL Process
+
+Source Data (Excel / CSV)
+        ↓
+Extraction
+        ↓
+Staging Table (Stg_ProductSales)
+        ↓
+Transformation (Cleaning / Formatting)
+        ↓
+Load into Target Table (ProductSales)
+        ↓
+Final Database ready for Analysis

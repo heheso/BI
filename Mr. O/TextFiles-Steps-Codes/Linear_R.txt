@@ -1,0 +1,57 @@
+Perform the Linear regression on the given data warehouse data using R
+
+Solution
+
+#############################################
+# Linear Regression Implementation in R
+#############################################
+
+#----------------------------------------
+# [1] Create Relationship Model & get Coefficients
+#----------------------------------------
+
+x <- c(151, 174, 138, 186, 128, 136, 179, 163, 152, 131)
+y <- c(63, 81, 56, 91, 47, 57, 76, 72, 62, 48)
+
+# Apply linear regression
+relation <- lm(y ~ x)
+
+# Print model coefficients
+print(relation)
+
+
+#----------------------------------------
+# [2] Get the Summary of the Relationship
+#----------------------------------------
+
+summary(relation)
+
+
+#----------------------------------------
+# [3] Predict the weight of new persons
+#----------------------------------------
+
+# Height of new person
+newdata <- data.frame(x = 170)
+
+# Predict weight
+result <- predict(relation, newdata)
+
+print(result)
+
+
+#----------------------------------------
+# [4] Visualize the Regression Graphically
+#----------------------------------------
+
+# Create scatter plot
+plot(x, y,
+     col = "blue",
+     main = "Height vs Weight Regression",
+     xlab = "Height in cm",
+     ylab = "Weight in Kg",
+     pch = 16,
+     cex = 1.3)
+
+# Add regression line
+abline(relation, col = "red", lwd = 2)

@@ -1,0 +1,28 @@
+Perform the Extraction Transformation and Loading (ETL) process to construct the database from the MS Excel.
+
+ETL Process Using Excel
+Step 1: Extract Data
+Open MS Excel.
+Go to the Data tab → Get Data → From File → From Workbook (if your data is in another Excel file) or From Text/CSV (if CSV).
+Select your file (e.g., Coffee_sales.xlsx).
+In the Navigator window, select the sheet containing the raw data → click Load or Transform Data if you want to clean it immediately.
+
+Step 2: Transform Data
+Inside Power Query Editor (Transform Data), you can perform the following transformations:
+Remove unnecessary columns
+Select columns not needed → Right-click → Remove Columns.
+Rename columns
+Double-click column headers → give meaningful names.
+Change data types
+Ensure numeric columns (like Money) are set to Decimal Number.
+Dates → Date/Time.
+Handle missing values
+Go to Transform → Replace Values or Remove Rows → Remove Blank Rows.
+Create calculated columns (if needed)
+For example, calculate Revenue per Coffee:
+Revenue = Quantity * Price
+In Power Query → Add Column → Custom Column → write formula.
+Filter rows if required
+For example, filter only certain Time_of_Day or Weekday.
+Click Close & Load → Load to Excel Table.
+Now you have cleaned and structured data ready for analysis → your ETL is complete.

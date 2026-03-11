@@ -1,0 +1,45 @@
+Q2. Import the cube in Microsoft Excel and create the Pivot table and Pivot Chart to perform
+data analysis.
+
+Solution (Method 1: If Cube is Provided)
+
+===========================
+1. Import the Cube in Excel
+===========================
+Open Microsoft Excel
+Go to:
+Data → Get Data → From Database → From Analysis Services
+Enter the Server Name where the cube is stored.
+Click Next
+Select the required Database and Cube.
+Click Finish
+Choose:
+PivotTable Report
+Select:
+New Worksheet
+Click OK
+
+Excel will import the cube data and open the PivotTable Fields panel.
+
+=================================
+2. Create the Pivot Table & Chart
+=================================
+Go to:
+Insert → PivotChart → PivotChart & PivotTable
+Select Table/Range: Cube sheet
+Where to place: New Worksheet
+Click OK
+
+Drag fields as follows:
+Rows → Region
+Columns → Product
+Values → Sales / Revenue measure
+Filters → Year or Month (optional)
+
+============
+Final Answer
+============ 
+Cube data is summarized using PivotTable and displayed visually using PivotChart.
+
+
+

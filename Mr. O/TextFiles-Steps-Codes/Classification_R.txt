@@ -1,0 +1,102 @@
+Implementation of Classification algorithm in R Programming.
+
+Solution
+
+========================================
+Implementation of Classification Algorithm in R
+========================================
+
+Part 1: Create and Plot Rainfall Time Series
+#----------------------------------------
+#Step 1: Start R / RStudio
+#----------------------------------------
+#1. Open R or RStudio.
+#2. Create a new script file.
+
+#----------------------------------------
+#Step 2: Enter Rainfall Data
+#----------------------------------------
+# Create a vector containing rainfall values
+rainfall <- c(799,1174.8,865.1,1334.6,635.4,918.5,685.5,998.6,784.2,985,882.8,1071)
+
+#----------------------------------------
+#Step 3: Convert Data into Time Series
+#----------------------------------------
+# Create a time series object
+rainfall.timeseries <- ts(rainfall, start=c(2012,1), frequency=12)
+
+#----------------------------------------
+#Step 4: Display Time Series Data
+#----------------------------------------
+print(rainfall.timeseries)
+plot(rainfall.timeseries)
+
+#----------------------------------------
+#Step 5: Save Plot as Image
+#----------------------------------------
+# Create image file
+png(file="rainfall.png")
+
+#----------------------------------------
+#Step 6: Plot the Time Series Graph
+#----------------------------------------
+#plot(rainfall.timeseries)
+
+#----------------------------------------
+#Step 7: Close Image File
+#----------------------------------------
+dev.off()
+#Result:
+#A rainfall time series graph will be saved as "rainfall.png".
+
+
+Part 2: Decision Tree Classification
+#----------------------------------------
+#Step 1: Install Required Package
+#----------------------------------------
+options(repos = c(CRAN = "https://cloud.r-project.org"))  #if only library not getting downloaded
+install.packages("party")
+
+#----------------------------------------
+#Step 2: Load the Package
+#----------------------------------------
+library(party)
+
+#----------------------------------------
+#Step 3: Load Dataset
+#----------------------------------------
+# Use built-in dataset
+input.dat <- readingSkills[c(1:105),]
+
+#----------------------------------------
+#Step 4: Create Image File for Tree
+#----------------------------------------
+png(file="decision_tree.png")
+
+#----------------------------------------
+#Step 5: Build the Decision Tree
+#----------------------------------------
+output.tree <- ctree(
+  nativeSpeaker ~ age + shoeSize + score,
+  data = input.dat
+)
+
+#----------------------------------------
+#Step 6: Plot the Decision Tree
+#----------------------------------------
+plot(output.tree)
+
+#----------------------------------------
+#Step 7: Save the Tree Image
+#----------------------------------------
+dev.off()
+#Result:
+#A decision tree diagram will be generated and saved as "decision_tree.png".
+
+#========================================
+#Conclusion
+#========================================
+#The rainfall data was converted into a time series object and visualized.
+#A classification decision tree was created using the readingSkills dataset
+#to predict whether a person is a native speaker based on age, shoe size,
+#and score.

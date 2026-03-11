@@ -1,0 +1,64 @@
+Import the data warehouse data in Microsoft Excel and create the Pivot table and Pivot Chart.
+
+
+Solution (Method 1: Using Data Waregouse from SQL)
+1. open SSMS 2012
+2. connect db engine
+3. new query
+4. copy paste script
+5. execute the script
+6. reload connected db engine 
+
+7. open excel
+8. data tab --> Get Data -->  From Database --> From SQL Server database  --> enter server and db name --> load the tables
+9. insert tab --> pivot chart --> pivot chart and table 
+10. pivot chart fields
+
+filter - SalesDateKey from FactProduct Sales
+columns -
+rows - ProductName drom DimProduct
+values - ProductACtualCost in DimProduct (when added, it will already be sum)
+( all above will be given in question which chart and fields to use)
+
+
+
+Solution (Method 2: Using Provided Dataset eg Sales_Data.csv)
+
+==============================
+1. Import the Dataset in Excel
+==============================
+Open Microsoft Excel
+Go to:
+Data → From Text/CSV
+Select file:
+Sales_Data.csv
+Click Load
+The dataset will appear in Excel.
+
+Example Dataset
+Date        Region    Product   Quantity   UnitPrice   TotalPrice
+23-02-2023  East      Laptop    2          1145.20     2290.40
+19-12-2024  South     Phone     1          544.01      544.01
+10-05-2023  North     Desk      3          1453.96     4361.86
+26-02-2025  Central   Chair     4          1471.93     5887.74
+
+=================================
+2. Create the Pivot Table & Chart
+=================================
+Go to:
+Insert → PivotChart → PivotChart & PivotTable
+Select Table/Range: Sales_Data sheet
+Where to place: New Worksheet
+Click OK
+
+Drag fields as follows:
+Rows → Region
+Columns → Product
+Values → TotalPrice (Sum)
+
+============
+Final Answer
+============ 
+Sales dataset is summarized using PivotTable.
+PivotChart visually compares sales across regions and products.
+

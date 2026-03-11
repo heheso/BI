@@ -1,0 +1,80 @@
+Create the ETL map for the above and setup the schedule for execution
+
+========================
+ETL Process using Power BI
+========================
+--------------------------------
+Step 1: Extract
+--------------------------------
+1. Open Power BI Desktop
+2. Click Get Data
+3. Choose source:
+   • Excel
+   • CSV
+   • SQL Server
+   • OData Feed
+4. Select dataset
+5. Click Transform Data
+Power Query Editor will open.
+
+--------------------------------
+Step 2: Transform
+--------------------------------
+Perform data cleaning:
+• Remove unwanted columns
+Right click column → Remove
+• Change data types
+Transform → Data Type → Detet data Type
+• Filter rows
+Use column filter
+• Remove duplicates
+Home → Remove Rows → Remove Duplicates
+• Create new column
+Add Column → Custom Column
+Example:
+Profit = Sales * 0.20
+
+--------------------------------
+Step 3: Load
+--------------------------------
+Click Close & Apply
+Data loads into Power BI model.
+
+--------------------------------
+Step 4: Create Reports
+--------------------------------
+Use visuals like:
+• Bar Chart
+• Pie Chart
+• Pivot style table
+• Line chart
+
+Dont do from this as it will require login
+
+--------------------------------
+Step 5: Publish Report
+--------------------------------
+1. Click Publish
+2. Sign in to Power BI Service
+3. Select workspace
+
+--------------------------------
+Step 6: Schedule Refresh
+--------------------------------
+1. Open Power BI Service (app.powerbi.com)
+2. Go to Workspace
+3. Click Dataset
+4. Settings → Scheduled Refresh
+
+Enable:
+✔ Keep data up to date
+
+Set schedule:
+• Daily
+• Weekly
+• Hourly
+
+Example:
+Refresh every day at 9 AM
+
+Power BI will automatically run the ETL process.

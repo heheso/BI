@@ -1,0 +1,77 @@
+A teacher wants to analyze the marks of students in different subjects using a Pivot Table and Pivot Chart.
+Given Data (Sample):
+Student Name    Subject Marks
+Aarav   Math    85
+Aarav   Science 78
+Aarav   English 82
+Riya    Math    76
+Riya    Science 80
+Riya    English 72
+Kunal   Math    90
+Kunal   Science 88 
+Kunal   English 85
+Priya   Math    84
+Priya   Science 81
+Priya   English 79
+Tasks: 
+1. Create a Pivot Table to show the average marks per subject.
+2. Use filters to check individual student performance.
+3. Create a Pivot Chart (such as a bar or column chart) to visually compare marks across different subjects.
+
+Solution
+
+==========================
+1. Enter the Data in Excel
+==========================
+A             B        C
+Student Name  Subject  Marks
+Aarav         Math     85
+Aarav         Science  78
+Aarav         English  82
+Riya          Math     76
+Riya          Science  80
+Riya          English  72
+Kunal         Math     90
+Kunal         Science  88
+Kunal         English  85
+Priya         Math     84
+Priya         Science  81
+Priya         English  79
+
+================================
+2. Create Pivot Table
+================================
+1. Select the entire dataset (A1:C13)
+2. Go to Insert → PivotTable → New Worksheet
+3. In PivotTable Fields:
+   - Drag **Subject** → Rows
+   - Drag **Marks** → Values → Change Value Field Settings → **Average**
+   - (Optional) Drag **Student Name** → Filters
+
+Resulting Pivot Table will show:
+
+Subject    Average of Marks
+English    79.5
+Math       82.5
+Science    81.75
+
+================================
+3. Use Filters for Individual Student
+================================
+1. In Pivot Table, use the **Student Name filter** at the top
+2. Select a student (e.g., Riya)
+3. Pivot Table updates to show **only that student’s average marks per subject**
+
+================================
+4. Create Pivot Chart
+================================
+1. Click anywhere in the Pivot Table
+2. Go to  Design tab
+3. Choose **Column Chart** or **Bar Chart** in Change Chart Type
+
+================================
+5. Interpretation
+================================
+- Pivot Table shows **average marks per subject**.  
+- Filter allows checking **any individual student**.  
+- Pivot Chart visually compares marks across subjects.  

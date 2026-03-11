@@ -1,0 +1,112 @@
+Q. A student has scored marks in four subjects, and they want to predict their total and average marks based on possible improvements in Subject 4. 
+Given Data: 
+Subject Marks 
+Subject 1 78 
+Subject 2 82 
+Subject 3 74 
+Subject 4 65 
+1. Calculate the total marks and average marks using Excel formulas. 
+2. Use What-If Analysis (Data Table) to check how the total marks will change if the student scores different marks in 
+Subject 4 (e.g., 65, 70, 75, 80, 85, 90). 
+Find out the minimum marks the student must score in Subject 4 to achieve an average of 80 using Goal Seek.
+
+Solution
+
+==========================
+1. Enter the Data in Excel
+==========================
+A              B
+Subject        Marks
+Subject 1      78      
+Subject 2      82      
+Subject 3      74      
+Subject 4      65      
+
+Total
+Average
+
+===============================================
+2. Calculate Total and Average (Excel Formulas)
+===============================================
+Total Marks
+In cell B7 type:
+=SUM(B2:B5)
+Result → 299     
+
+Average Marks
+In cell B8 type:
+=AVERAGE(B2:B5)
+Result → 74.75  
+
+================================
+3. What-If Analysis (Data Table)
+================================
+Goal: Check how Total Marks change when Subject 4 marks change.
+
+-- Step 1: Create a small table
+D               E
+Subject 4 Marks Total
+65              
+70
+75
+80
+85
+90
+
+In E2 type formula:
+=$B$7
+(This links to total marks)
+
+-- Step 2: Create Data Table
+Select D2:E7
+Go to Data → What-If Analysis → Data Table
+In Column Input Cell select:
+B5   (Subject 4 marks cell)
+Click OK
+Excel will automatically show new Total marks for each Subject 4 value.
+Example result:
+Subject 4      Total
+65             299
+70             304
+75             309
+80             314
+85             319
+90             324
+
+=================================================
+4. Prepare Separate Column for Goal Seek Testing
+=================================================
+Copy Column B into Column C so original values do not change.
+A              B        	    C
+Subject        Marks    	    Test Marks
+Subject 1      78       	    78
+Subject 2      82       	    82
+Subject 3      74       	    74
+Subject 4      65       	    65
+Total          =SUM(B2:B5)      =SUM(C2:C5)
+Average        =AVERAGE(B2:B5)  =AVERAGE(C2:C5)
+
+===========================
+5. Goal Seek (Average = 80)
+===========================
+We want Average = 80
+Steps
+Data → What-If Analysis → Goal Seek
+Fill values:
+Set Cell: C8
+To Value: 80
+By Changing Cell: C5
+Click OK
+
+Result
+Subject 4 must be 86 marks.
+Because:
+(78 + 82 + 74 + 86) / 4 = 80
+
+============
+Final Answer
+============ 
+Total Marks = 299
+Average Marks = 74.75
+Data Table shows totals from 299 to 324
+Minimum marks in Subject 4 for average 80 = 86
